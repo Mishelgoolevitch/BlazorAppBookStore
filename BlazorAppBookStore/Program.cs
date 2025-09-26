@@ -7,9 +7,7 @@ using BlazorAppBookStore.Services;
 var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddScoped<Cart>();
-    // другие сервисы
-
-// Add services to the container.
+    
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 builder.Services.AddRazorComponents();
 builder.Services.AddScoped<IBookReviewService, BookReviewService>();
@@ -17,7 +15,7 @@ builder.Services.AddScoped<IBookReviewService, BookReviewService>();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
