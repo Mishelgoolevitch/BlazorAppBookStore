@@ -1,0 +1,98 @@
+@page "/BookItem/{Id}"
+@rendermode InteractiveServer
+@* @attribute [StreamRendering(true)] *@
+
+@inject IBookReviewService BookReviewService
+@inject Cart cart
+
+@* <div class="main">  *@
+<div class="col-md-3 mb-2">
+    
+    <div class="products-grid"> 
+        <div class="product-container">
+              <div class="product-image-container">
+                <a href="/BookReview/@Book?.Id">
+                <img class="product-image"
+                         src="@Book?.ImageUrl">
+                </a>
+                </div>
+             <div class="product-name limit-text-to-2-lines">
+                    @Book?.Title
+                </div> 
+
+         <div class="product-rating-container"> 
+                 <img class="product-rating-stars" 
+                     src="images/ratings/rating-45.png"> 
+                 <div class="product-rating-count link-primary">
+                        @Book?.RatingStars
+                    </div>            
+         </div>
+
+             <div class="product-price">
+                    @Book?.Price
+                </div> 
+
+             <div class="product-quantity-container"> 
+                 <select> 
+                     <option selected value="1">1</option> 
+                     <option value="2">2</option> 
+                     <option value="3">3</option> 
+                     <option value="4">4</option> 
+                     <option value="5">5</option> 
+                     <option value="6">6</option> 
+                     <option value="7">7</option> 
+                     <option value="8">8</option> 
+                     <option value="9">9</option> 
+                     <option value="10">10</option> 
+                 </select> 
+             </div> 
+
+             <div class="product-spacer"></div> 
+
+             <div class="added-to-cart"> 
+                 <img src="images/icons/checkmark.png"> 
+                 Added 
+             </div>
+
+            <button class="add-to-cart-button button-primary"
+                    @onclick="() => AddBookToCart()">
+                Add to Cart
+            </button>
+
+           @*  <button class="add-to-cart-button button-primary"
+                    @onclick="() => myCart.Add(Book)">
+                Add to Cart 
+             </button> *@
+           
+        </div>
+        
+    </div>
+    
+</div>
+@code {
+     [Parameter]
+   // public string? Id { get; set; }
+    public BooksModel? Book { get; set; }
+   // Cart myCart = new Cart();
+    private void AddBookToCart()
+    {
+        if (Book != null)
+        {
+            cart.Add(Book);
+        }
+    }
+    // protected override async Task OnInitializedAsync()
+    // {
+    //     await Task.Delay(1000);
+
+
+    //     if (!string.IsNullOrEmpty(Id))
+    //     {
+    //         Book = BookReviewService.GetBookById(Int32.Parse(Id));
+    //     }
+
+
+    }
+
+
+

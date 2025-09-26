@@ -1,0 +1,43 @@
+﻿@page "/"
+
+@rendermode InteractiveServer
+@* @attribute [StreamRendering(true)] *@
+@inject IBookReviewService BookReviewService
+
+<PageTitle>Index</PageTitle>
+
+<h1>Books</h1>
+
+@if(Books is null)
+{
+    <h3>Loading...</h3>
+}
+else
+{
+    @for (int x = 0; x <= Books.Count / 4; x++)
+    {
+        BooksModel[] bookGroup = Books.Skip(x * 4).Take(4).ToArray();
+
+        <div class="row">
+
+            @foreach (BooksModel book in bookGroup)
+            {
+               
+                <BookItem Book="@book" />
+            }
+        </div>
+
+    }
+
+}
+
+@code{
+    List<BooksModel>? Books = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(2000);
+        Books = BookReviewService?.GetBooks();
+    }
+
+}

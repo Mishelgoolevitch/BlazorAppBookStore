@@ -1,0 +1,49 @@
+﻿@page "/BookReview/{Id}"
+@rendermode InteractiveServer
+@* @attribute [StreamRendering(true)] *@
+@inject IBookReviewService BookReviewService
+
+
+<h3>Books Review for @BookItem?.Title</h3>
+
+@if (BookItem == null)
+{
+    <h3>Loading...</h3>
+}
+else
+{
+    <div class="row">
+        <div class="col-6">
+            <img style="width:70%" src="@BookItem?.ImageUrl" alt="@BookItem?.Title" />
+        </div>
+        <div class="col-6">
+            @BookItem?.Review
+        </div>
+
+    </div>
+}
+
+
+@code {
+    [Parameter]
+    public string? Id { get; set; }
+
+    private BooksModel? BookItem { get; set; }
+
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(1000);
+
+
+        if (!string.IsNullOrEmpty(Id))
+        {
+            BookItem = BookReviewService.GetBookById(Int32.Parse(Id));
+        }
+
+
+    }
+
+}
+

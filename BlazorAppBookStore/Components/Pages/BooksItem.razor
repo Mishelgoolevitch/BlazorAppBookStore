@@ -1,0 +1,48 @@
+﻿@page "/BookItem/{Id}"
+@rendermode InteractiveServer
+@* @inject CounterStateService CounterService *@
+
+
+@* <div class="col-md-3 mb-2">
+
+    <div class="products-grid">
+        <div class="product-container">
+            <div class="product-image-container">
+                <a href="/BookReview/@book?.Id">
+                    <img class="product-image"
+                         src="@book?.ImageUrl">
+                </a>
+            </div>
+            <div class="product-name limit-text-to-2-lines">
+                @book?.Title
+            </div>
+            <div class="product-rating-container">
+                <img class="product-rating-stars"
+                     src="images/ratings/rating-45.png">
+                <div class="product-rating-count link-primary">
+                    @book?.RatingStars
+                </div>
+            </div>
+            <div class="product-price">
+                @book?.Price
+            </div>
+            <div class="product-quantity-container">
+                <select>
+                    <option selected value="1">1</option>
+            </select>
+            </div>
+            <div class="product-spacer"></div>
+            <div class="added-to-cart">
+                <img src="images/icons/checkmark.png">
+                Added
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+     public Book? book { get; set; }
+ }
+
+ *@
+
+
